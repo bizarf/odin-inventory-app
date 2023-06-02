@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  
+  form(action="", method="post") 
+    label(for="name") Category:
+    input(type="text" name="name" value=(undefined===category ? "" : category.name))
+    label(for="password") Password:
+    input(type="password", name="password")
+    input(type="submit", value="Submit")
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

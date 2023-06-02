@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(class="content-container")
+      nav
+        block sidebar
+          ul
+            li
+              a(href="/store") Home
+            li
+              a(href="/store/products") All products
+            li
+              a(href="/store/categories") All categories
+            li
+              hr
+            li
+              a(href="/store/product/create") Create new product
+            li
+              a(href="/store/category/create") Create new category
+
+      div(class="main-content")
+        block content

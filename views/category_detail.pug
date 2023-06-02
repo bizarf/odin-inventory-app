@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= category.name
+  
+  ul
+    each product in category_products
+      li 
+        a(href=product.url) #{product.name}
+    else
+      li There are no products. 
+
+  hr
+  p
+    a(href=category.url+"/delete") Delete category
+  p
+    a(href=category.url+"/update") Update category
