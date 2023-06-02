@@ -6,7 +6,7 @@ block content
   form(action="", method="post") 
     label(for="name") Category:
     input(type="text" name="name" value=(undefined===category ? "" : category.name))
-    label(for="password") Password:
+    label(for="password") Password (minimum 8 characters):
     input(type="password", name="password")
     input(type="submit", value="Submit")
 
