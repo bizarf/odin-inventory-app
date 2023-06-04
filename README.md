@@ -2,7 +2,7 @@
 
 The goal of this project is to make an inventory management app. This will demonstrate an understand of the knowledge gained from the MDN express local library tutorial.
 
-[View the live site here]()
+[View the live site here](https://odin-inventory-app.onrender.com/store)
 
 #### Install:
 
