@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Product list goes here test2
+  
+  ul
+    each product in product_list
+      li 
+        a(href=product.url) #{product.name}
+    else
+      li There are no products. 

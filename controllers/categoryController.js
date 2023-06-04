@@ -15,7 +15,7 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
     // find the category by the id, and also do a check for any products that also have that same id in it's category section
     const [category, productsInCategory] = await Promise.all([
         Category.findById(req.params.id).exec(),
-        Product.find({ category: req.params.id }).exec(),
+        Product.find({ category: req.params.id }).sort({ name: 1 }).exec(),
     ]);
     if (category === null) {
         const err = new Error("Category not found");
@@ -36,8 +36,11 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
 
 exports.category_create_post = [
     // clean and sanitize form fields. also check correct number of characters entered
-    body("name", "You must enter a name").trim().isLength({ min: 1 }).escape(),
-    body("password", "Password must contain at least 8 characters")
+    body("name", "* You must enter a name")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("password", "* Password must contain at least 8 characters")
         .trim()
         .isLength({ min: 8 })
         .escape(),
@@ -54,8 +57,7 @@ exports.category_create_post = [
         if (!errors.isEmpty()) {
             res.render("category_form", {
                 title: "Create category",
-                name: req.body.name,
-                password: req.body.password,
+                category: category,
                 errors: errors.array(),
             });
             return;
@@ -97,13 +99,15 @@ exports.category_delete_post = [
     body("password")
         .trim()
         .isLength({ min: 8 })
-        .withMessage("Password must contain at least 8 characters")
+        .withMessage("* Password must contain at least 8 characters")
         .escape()
         // custom validator to check if the password matches with the one on the database
         .custom(async (value, { req, res }) => {
-            const category = await Category.findById(req.params.id).exec();
+            const category = await Category.findById(req.params.id, {
+                password: 1,
+            }).exec();
             if (category.password != value) {
-                throw new Error("The password does not match");
+                throw new Error("* The password does not match");
             }
         }),
 
@@ -158,17 +162,20 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
 
 exports.category_update_post = [
     // clean and sanitize form fields. also check correct number of characters entered
-    body("name", "You must enter a name").trim().isLength({ min: 1 }).escape(),
+    body("name", "* You must enter a name")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
     body("password")
         .trim()
         .isLength({ min: 8 })
-        .withMessage("Password must contain at least 8 characters")
+        .withMessage("* Password must contain at least 8 characters")
         .escape()
         // custom validator to check if the password matches with the one on the database
         .custom(async (value, { req, res }) => {
             const category = await Category.findById(req.params.id).exec();
             if (category.password != value) {
-                throw new Error("The password does not match");
+                throw new Error("* The password does not match");
             }
         }),
 

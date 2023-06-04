@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Product list goes here test
+  h1= product.name
+  
+  p #[strong Description:] #{product.description}
+  p #[strong Category:] 
+    a(href=product.category.url) #{product.category.name}
+  p #[strong Price:] #{product.price_converted}
+  p #[strong Stock:] #{product.stock}
+
+  hr
+  p
+    a(href=product.url+"/delete") Delete product
+  p
+    a(href=product.url+"/update") Update product

@@ -16,6 +16,30 @@ nav {
     margin-left: 1rem;
 }
 
-.main-content {
-    /* flex: 1 1 auto; */
+.creationForm {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    width: 25rem;
+}
+
+input {
+    margin-bottom: 1rem;
+}
+
+select {
+    margin-bottom: 1rem;
+}
+
+textarea {
+    margin-bottom: 1rem;
+}
+
+.submitBtn-div {
+    display: flex;
+    justify-content: center;
+}
+
+.submitBtn {
+    padding: 0.25em 1em;
 }

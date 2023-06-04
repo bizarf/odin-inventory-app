@@ -3,9 +3,30 @@ extends layout
 block content
   h1= title
   
-  form(action="", method="post") 
-    label(for="name") Name:
-    input(type="text" name="name")
-    label(for="password") Password:
+  form(action="", method="post" class="creationForm") 
+    label(for="name") #[strong Name:]
+    input(type="text" name="name" value=(undefined===product ? "" : product.name))
+    label(for="description") #[strong Description:]
+    textarea(name="description", cols="30", rows="5") !{undefined===product ? "" : product.description}
+    //- input(type="text" name="description" value=(undefined===product ? "" : product.description))
+    label(for="category") #[strong Category:]
+    select(name="category") 
+      each category in category_list
+        //- this if statement will select the previously chosen option if there's an error or when the user is updating the product
+        if (selected_category === category.name)
+          option(value=category._id, selected) #{category.name}
+        else
+          option(value=category._id) #{category.name}
+    label(for="price") #[strong Price:]
+    input(type="number", name="price" min=0 step=".01" value=(undefined===product ? "" : product.price))
+    label(for="stock") #[strong Stock:]
+    input(type="number", name="stock" min=0 value=(undefined===product ? "" : product.stock))
+    label(for="password") #[strong Password:]
     input(type="password", name="password")
-    input(type="submit", value="Submit")
+    div(class="submitBtn-div")
+      input(type="submit", value="Submit" class="submitBtn")
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

@@ -1,5 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Product list goes here
+  h1 #{title}: #{product.name}
+  
+  p Are you sure that you want to delete this product?
+
+  form(action="", method="post" class="creationForm") 
+    label(for="password") Password (minimum 8 characters):
+    input(type="password", name="password")
+    input(type="hidden", name="productId", required="true", value=product._id)
+    div(class="submitBtn-div")
+      input(type="submit", value="Delete" class="submitBtn")
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

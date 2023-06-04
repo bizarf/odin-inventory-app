@@ -20,13 +20,13 @@ router.post("/product/create", productController.product_create_post);
 router.get("/product/:id/delete", productController.product_delete_get);
 
 // POST request for deleting a product
-router.get("/product/:id/delete", productController.product_delete_post);
+router.post("/product/:id/delete", productController.product_delete_post);
 
 // GET request for updating a product
 router.get("/product/:id/update", productController.product_update_get);
 
 // POST request for updating a product
-router.get("/product/:id/update", productController.product_update_post);
+router.post("/product/:id/update", productController.product_update_post);
 
 // GET request for the list of all products
 router.get("/products", productController.product_list);

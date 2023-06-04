@@ -3,12 +3,13 @@ extends layout
 block content
   h1= title
   
-  form(action="", method="post") 
-    label(for="name") Category:
+  form(action="", method="post" class="creationForm") 
+    label(for="name") #[strong Category:]
     input(type="text" name="name" value=(undefined===category ? "" : category.name))
-    label(for="password") Password (minimum 8 characters):
+    label(for="password") #[strong Password (minimum 8 characters):]
     input(type="password", name="password")
-    input(type="submit", value="Submit")
+    div(class="submitBtn-div")
+      input(type="submit", value="Submit" class="submitBtn")
 
   if errors
     ul
